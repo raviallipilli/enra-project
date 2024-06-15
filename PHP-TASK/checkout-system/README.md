@@ -37,7 +37,7 @@ MySQL (for testing purposes)
 ### Installation
 1. Clone the repository:
    -- git clone <repository-url>
-   -- cd <repository-directory>
+   -- cd <repository-directory> - the php project is two folders inside so we need to cd the folder checkout-system
 
 2. Set up environment file:
    -- cp .env.example .env
@@ -138,6 +138,12 @@ Run the feature tests:
 
 ### Testing
 The tests are located in the tests/Feature directory and cover the primary functionalities of scanning items and calculating totals.
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+### Note
+
+The PHPDocs doesn't support on Visual Studio Code IDE, so i recommend opening the project on PHPStorm, lot of dependencies are conflicting to setup on VS Code 
 
 --------------------------------------------------------------------------------------------------------------------------------------
 
