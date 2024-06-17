@@ -1,3 +1,6 @@
+-- Select the database for loan application if not already used as reference
+USE `loan-application`;
+
 -- Query to get the number of applications per broker
 SELECT 
     brokers.name AS broker_name,

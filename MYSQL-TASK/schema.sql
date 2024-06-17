@@ -1,3 +1,6 @@
+-- Create database for loan application as loan_application
+CREATE DATABASE IF NOT EXISTS `loan-application`;
+
 -- Create customers table
 CREATE TABLE customers (
     id INT AUTO_INCREMENT PRIMARY KEY,
