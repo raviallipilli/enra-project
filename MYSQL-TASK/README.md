@@ -31,20 +31,20 @@ A trigger is used to calculate the `monthly_payment` field in the `applications`
 
 2. **List of Applications and Their Status Transitions, Per Broker**:
     ```sql
-    SELECT b.name AS broker_name, a.id AS application_id, s.status, s.created_at AS status_change_date
+    SELECT b.name AS broker_name, a.id AS application_id, a.status AS current_status, s.status AS status_transition, s.created_at AS transition_time
     FROM applications a
     LEFT JOIN brokers b ON a.broker_id = b.id
-    JOIN application_statuses s ON a.id = s.application_id
+    LEFT JOIN application_statuses s ON a.id = s.application_id
     ORDER BY b.name, a.id, s.created_at;
     ```
 
 3. **Customers with Incomplete Address History**:
     ```sql
-    SELECT c.id, c.full_name, c.email, COUNT(a.id) AS address_count
+    SELECT c.full_name, c.email, COUNT(a.id) AS current_address_listed, 5 - COUNT(a.id) AS missing_adress_in_5_years
     FROM customers c
     LEFT JOIN addresses a ON c.id = a.customer_id
-    WHERE (SELECT DATEDIFF(MAX(a.to_date), MIN(a.from_date)) FROM addresses a WHERE a.customer_id = c.id) < 1825
-    GROUP BY c.id, c.full_name, c.email;
+    GROUP BY c.id
+    HAVING current_address_listed < 5;
     ```
 
 ## Setup
